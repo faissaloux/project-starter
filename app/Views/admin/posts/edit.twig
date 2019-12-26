@@ -1,0 +1,128 @@
+{% extends "admin/layout.twig" %}
+
+{% block title %} {{l.postsedit.2}} {% endblock %}
+
+
+{% block content %}
+    
+ <!-- Main content -->
+<div class="content-wrapper">
+
+
+
+	<!-- Page header -->
+				<div class="page-header page-header-default">
+					<div class="page-header-content">
+						<div class="page-title">
+						   <h1>
+						       <span class="text-semibold"><i class="icon-arrow-right6 position-left goback"></i>
+       {{l.postsedit.2}}
+        </span>
+						   </h1>
+						
+						</div>
+
+						
+					</div>
+					<div class="breadcrumb-line">
+       <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+        <ul class="breadcrumb">
+            <li><a href="{{path_for('admin.index')}}" title="{{l.bread.1}}"><i class="icon-home2 position-left"></i>{{l.bread.1}}</a></li>
+            <li><a href="{{path_for('posts')}}" title="{{l.posts.1}}">{{l.posts.1}}</a></li>
+            <li class="active" title="{{l.postsedit.2}}">{{l.postsedit.2}}</li>
+            
+        </ul>
+    </div>
+    
+    
+				</div>
+				<!-- /page header -->
+			
+			
+			
+			
+				<!-- Content area -->
+				<div class="content">
+			
+
+			
+
+			        {% include "admin/elements/flash.twig" %}
+
+<div class="col-md-12">								
+
+<form  enctype="multipart/form-data" id="user_form" method='post' action="{{ path_for('posts.update', {id :content.id }) }}">
+<input type="hidden"  name="thumbnailChanged" id="thumbnailChanged" value="false" />
+ 
+
+
+<div class="col-md-9">
+    <div class="form-group">
+        <input type="text" class="form-control" name="title" placeholder="عنوان المقالة" value="{{content.title}}" />
+    </div>
+    <div class="form-group">	
+        <textarea name="post_content" id="posteditor" class="cke_rtl" >{{content.content}}</textarea>
+    </div>					
+</div>
+
+
+<!-- sidebar -->
+<div class="col-md-3">
+    <button type="submit" class="btn btn-block btn-primary">{{l.postsedit.3}} <i class="icon-arrow-left13 position-right"></i></button>
+    <br>
+    <!-- post categories -->
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h6 class="panel-title"> {{l.postsedit.4}} </h6>
+        </div>
+
+        <div class="panel-body">
+             <select  name="postCategory" style="width:100%;" class="postCategory">
+                <option value="0">{{l.postsedit.5}}</option>
+                    {% for categorie in categories %}
+                    <option value="{{categorie.id}}">{{categorie.name}}</option>
+                    {% endfor %} 
+              </select>
+        </div>
+    </div>
+    <!-- post categories -->
+    
+    <!-- post Thumbnail -->
+    <div class="panel panel-white">
+                <div class="panel-heading ">
+                    <h6 class="panel-title">{{l.postsedit.6}}</h6>
+                    <div class="heading-elements" >
+                        <ul class="icons-list">
+                        {% if content.thumbnail  != " "  %}
+                            <li><a id="deleteImage"><i class="icon-cross2 position-right"></i> {{l.postsedit.7}} </a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                
+                <!-- preview thumbnail -->
+                <div class="preview-thumbnail" >
+                   {% if content.thumbnail  != " "  %} <img src="{{url.posts}}{{content.thumbnail}}"   id="post_thumbnail"  /> {% endif %}
+                </div>
+                
+                <!-- thumbnail tools -->
+                <div class="thumbnail-tools" {% if content.thumbnail  != " "  %} style="display:none;" {% endif %}>
+                  <label for="Upload-thumbnail"  ><i class="icon-image2 position-left"></i>{{l.postsedit.8}} </label>
+                  <input name="post_thumbnail" id="Upload-thumbnail" accept="image/jpg, image/jpeg, image/png" type="file" />  
+                </div>
+                <!-- thumbnail tools -->
+ 
+                </div>
+            </div>
+            
+
+        </div>
+ </form>
+ </div>
+</div>
+<!-- /content area -->
+	</div>
+	
+
+{% endblock %}

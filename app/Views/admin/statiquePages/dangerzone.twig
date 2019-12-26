@@ -1,0 +1,182 @@
+{% extends "admin/layout.twig" %}
+{% block title %}  تفريغ المحتوى {% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+
+
+<!-- Page header -->
+<div class="page-header page-header page-header-transparent  " >
+   
+    <div class="page-header-content">
+        <div class="page-title">
+            <h1><i class="icon-arrow-right6 position-left"></i> <span class="text-semibold">  تفريغ المحتوى  </span></h1>
+            <small class="display-block">المرجوا الإنتباه جداً قبل الضغط على اي زر واتخاذ اي قرار بتفريغ المحتوى ، لا يمكن التراجع عن العملية</small>
+        </div>
+
+        <div class="heading-elements">
+          
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+			        {% include "admin/elements/flash.twig" %}
+
+<div class="panel panel-flat">
+<div class="panel-heading">
+							<h5 class="panel-title">
+							لا يمكن التراجع عن العملية ، المرجوا الإستخدام بتركيز وانتباه
+							<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+							<div class="heading-elements">
+								<ul class="icons-list">
+			                		<li><a data-action="collapse"></a></li>
+			                		<li><a data-action="reload"></a></li>
+			                		<li><a data-action="close"></a></li>
+			                	</ul>
+		                	</div>
+						</div>
+<div class="panel-body">
+						<div class="">
+							<table class="table table-bordered table-lg">
+							
+								<tbody>
+								<tr class=" active" style='margin-top:35px;'>
+										<th colspan="3">المحتوى</th>
+									</tr>
+									<tr>
+										<td>المقالات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Post"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+                                    <tr>
+										<td>تصنيف المقالات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "PostsCategories"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+								
+									<tr>
+										<td>الصفحات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Page" })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+
+								
+									<tr>
+										<td>التعليقات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Comments" })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+				                     <tr>
+										<td>الأسئلة الشائعة</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Faqs" })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr> 
+                                    <tr>
+										<td>الرسائل</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Emails"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+                                  
+                                   <tr class="border-double active" style='margin-top:35px;'>
+										<th colspan="3">المتجر</th>
+									</tr>
+      								
+									<tr>
+										<td>المنتوجات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Product"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+                               
+									<tr>
+										<td>تصنيف المنتوجات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "ProductCategories"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>  
+								
+									<tr>
+										<td>الطلبات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Order"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+                              
+								
+									<tr>
+										<td>القسائم</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Coupons"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+                                 
+                                  
+								                                  
+                                     
+                                       
+                                  <tr class="border-double active" style='margin-top:35px;'>
+										<th colspan="3">الموقع</th>
+									</tr>
+                              <tr>
+										<td>الإعلانات</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Ads"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr> 
+                              	    <tr>
+										<td>القوائم</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Menus"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr> 
+                                       <tr>
+										<td>الوسائط</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "Media"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr>
+                                      
+                                      <tr>
+										<td>الأعضاء</td>
+										<td>
+											<a href='{{path_for("dangerzone.clean", { model : "User"  })}}' class="btn btn-success">تفريغ</a>
+										</td>
+										
+									</tr> 
+                              
+                               
+                                </tbody>
+                            </table>
+                        </div>
+     </div>
+</div>
+</div>
+{% endblock %}

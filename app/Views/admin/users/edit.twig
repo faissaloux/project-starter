@@ -1,0 +1,314 @@
+{% extends "admin/layout.twig" %}
+
+{% block title %}  {{l.usersedit.2}} | {{ user.username}}  {% endblock %}
+
+
+{% block content %}
+    
+
+
+<!-- Main content -->
+<div class="content-wrapper">
+<!-- Page header -->
+<div class="page-header page-header-default ">
+<div class="page-header-content">
+
+<div class="page-title">
+<h1> <span class="text-semibold"><i class="icon-arrow-right6 position-left goback"></i>
+{{l.usersedit.3}}</span></h1>
+</div>
+
+<div class="heading-elements">
+
+
+
+</div>
+</div>
+        <div class="breadcrumb-line">
+<ul class="breadcrumb">
+    <li><a href="{{path_for('admin.index')}}" title="الرئيسية"><i class="icon-home2 position-left"></i>الرئيسية</a></li>
+    <li class="active" ><a title="الأعضاء" href="{{path_for('users')}}">الأعضاء</a></li>
+    <li class="active" title="{{l.userscreate.1}}">{{l.usersedit.3}}</li>
+</ul>
+
+
+</div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+
+{% include "admin/elements/flash.twig" %}
+
+
+<!-- تعديل البيانات الشخصية للمستخدم -->
+<div class="col-md-9">								
+<form  enctype="multipart/form-data" id="user_form" method='post' action="{{ path_for('users.update', {'id': user.id}) }}">
+
+<input type="hidden" id='avatarChanged' name="avatarChanged" value="false" />
+<input type="hidden" name="validate" value="update-general-user-info" />
+
+<!-- صورة الحساب -->		
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{l.usersedit.4}}</h5>
+         <p class=" text-muted"> حجم الصورة يجب أن يكون على الأقل 150x150 بيكسل </p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <center>
+                <div class="avatar-preview"><img id='profile_avatar' src="{{url.avatars}}{{user.avatar}}" class="img-circle" /></div>
+            </center>
+            <br>
+            <br>
+            <center>
+                <label for="avatarUploadPreview" class="btn btn-danger btn-rounded"><i class="icon-image2 position-left"></i>
+                {{l.usersedit.5}}
+                </label>
+            </center>
+            
+            <p class="text-center text-muted"> {{l.usersedit.6}}</p>
+            <input name="avatar" id="avatarUploadPreview" accept="image/jpg, image/jpeg, image/png" style="visibility:hidden;" type="file" />
+        </div>
+    </div>
+</div>
+<!--// صورة الحساب -->					
+					
+
+<!-- المعلومات الشخصية -->			
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{l.usersedit.7}}</h5>
+        <p>{{l.usersedit.8}}</p>
+    </div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{l.usersedit.9}}</label>
+                                <input type="text" class="form-control frequired" value="{{user.username}}" name="username" placeholder="@username">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{l.usersedit.10}}</label>
+                                <input type="text" class="form-control" value="{{user.full_name}}" name="full_name" placeholder="اسمك الحقيقي الكامل">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{l.usersedit.11}}</label>
+                                <input type="text" class="form-control frequired" value="{{user.email}}" name="email" placeholder="البريد الإلكتروني">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{l.usersedit.12}}</label>
+                                <input type="text" class="form-control" value='{{user.phone}}' name="phone" placeholder="رقم الهاتف">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{l.usersedit.13}}</label>
+                                <select style="width:100%;" class="country" name="country">
+                                    {% for key,country in countries %}
+                                        <option value="{{key}}">{{country}}</option>
+                                     {% endfor %}   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{l.usersedit.14}}</label>
+                                <input type="date" placeholder="ادخل تاريخ الميلاد" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="display-block">{{l.usersedit.15}}</label>
+                        <label class="radio-inline">
+							<input type="radio" value='male' class="styled" name="gender" {% if user.gender  == 'male' %} checked="checked" {% endif %}>
+												{{l.usersedit.16}}
+								</label>
+                        <label class="radio-inline">
+							<input type="radio" value='female' class="styled" name="gender" {% if user.gender  == 'female' %} checked="checked" {% endif %}>
+												{{l.usersedit.17}}
+						</label>
+                    </div>
+                    <div class="form-group">
+                        <label>{{l.usersedit.18}}</label>
+                        <textarea name="description" class='form-control' cols="5" rows="5" placeholder="ادخل النبذة التعريفية هنا">{{user.description}}</textarea>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+<!--// المعلومات الشخصية -->						
+					
+					
+<!-- كلمة المرور -->										
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{l.usersedit.19}}</h3>
+        <p>{{l.usersedit.20}}</p>
+    </div>
+    <div class="panel-body">
+        <fieldset class="content-group">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="ادخل هنا كلمة المرور الجديدة" />
+                        <div class="input-group-btn">
+                            <button type="button" onclick="tooglePassword()" class="btn btn-default"><i class="icon-eye"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <a onclick="password_generator()" class="btn btn-primary">{{l.usersedit.21}}</a>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<!--// كلمة المرور -->
+
+<!-- السوشيال ميديا -->
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{l.usersedit.22}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-lg-2">{{l.usersedit.23}}</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" value="{{user.facebook}}" name="facebook" placeholder="facebook">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-lg-2">{{l.usersedit.24}}</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" value="{{user.twitter}}" name="twitter" placeholder="twitter">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-lg-2">{{l.usersedit.25}}</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" value='{{user.youtube}}' name="youtube" placeholder="youtube">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--// السوشيال ميديا -->
+
+
+<!-- تحديث البيانات -->
+<div class="text-right">
+<button type="submit" class="btn btn-block btn-primary">{{l.usersedit.26}}<i class="icon-arrow-left13 position-right"></i></button>
+</div>
+<!--// تحديث البيانات -->  
+<br>
+<div id="result"></div> 
+                              
+                                        
+
+</form> 
+
+
+              
+</div>					
+<!--// تعديل البيانات الشخصية للمستخدم -->
+
+
+
+<div class="col-md-3">
+
+    <div class="panel panel-white">
+        <div class="panel-heading ">
+            <h6 class="panel-title">{{l.usersedit.27}}</h6>
+        </div>
+        <div class="list-group no-border no-padding-top">
+            <a class="list-group-item text-indigo-400" href="{{path_for('users.block',{id : user.id })}}"> 
+                <i class="icon-user-cancel"></i> {{l.usersedit.28}} 
+            </a>
+            <a class="list-group-item text-success" href="{{path_for('users.activate',{id : user.id })}}"> 
+                <i class="icon-user-check"></i> {{l.usersedit.29}} 
+            </a>
+            <a class="list-group-item text-danger" href="{{path_for('users.delete',{id : user.id })}}"> 
+                <i class="icon-user-minus"></i> {{l.usersedit.30}} 
+            </a>
+        </div>
+    </div>
+
+    <div class="panel panel-white hidden">
+        <div class="panel-heading">
+            <h6 class="panel-title">تعيين المستخدم ك :</h6>
+        </div>
+
+        <div class="panel-body">
+             <select style="width:100%;" class="role">
+                <option value="#">مستخدم عادي</option>
+                <option value="#">مدير</option>
+                <option value="#">مسؤول</option>
+                <option value="#">كاتب</option>
+                <option value="#">مراقب</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="panel panel-white hidden">
+        <div class="panel-heading">
+            <h6 class="text-semibold panel-title">
+                تحميل نسخة من المعلومات
+            </h6>
+        </div>
+
+        <div class="list-group no-border">
+            <a href="#" class="list-group-item">
+                <i class="icon-file-pdf"></i> تحميل pdf 
+            </a>
+
+            <a href="#" class="list-group-item">
+                <i class="icon-file-excel"></i> تحميل csv 
+            </a>
+        </div>
+    </div>
+
+
+   
+        
+
+        </div>
+
+</div>
+<!-- /content area -->
+
+<!-- set the select -->		
+<script> $('.country').select2({ placeholder: 'الدولة',}); </script>
+				
+<!-- change the value of selected Country to user's country -->
+<script> $(document).ready(function() { $(".country").select2().val("{{user.country}}").trigger("change") }); </script>		
+
+<!-- set the select -->		
+<script> $('.role').select2({ placeholder: 'تعيين المستخدم',}); </script>
+
+{% endblock %}

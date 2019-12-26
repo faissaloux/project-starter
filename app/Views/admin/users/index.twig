@@ -1,0 +1,230 @@
+{% extends "admin/layout.twig" %}
+{% block title %} {{l.users.1}} {% endblock %}
+
+{% block content %}
+   
+        
+      
+         
+<!-- Main content -->
+<div class="content-wrapper">
+
+<!-- Page header -->
+<div class="page-header page-header-default ">
+<div class="page-header-content">
+
+<div class="page-title">
+<h1> <span class="text-semibold"><i class="icon-arrow-right6 position-left goback"></i>
+{{l.users.1}}</span></h1>
+</div>
+
+<div class="heading-elements">
+<a href="{{ path_for('users.create') }}" class="btn bg-blue btn-labeled heading-btn"><b><i class="icon-plus3"></i></b>{{l.users.4}}</a>
+
+<a href="javascript:void(0);" data-toggle="modal" data-target="#modal_iconified" class="btn bg-danger btn-labeled heading-btn"><b><i class="icon-trash"></i></b> {{l.users.5}}</a>
+
+
+<div id="modal_iconified" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h5 class="modal-title"><i class="icon-menu7"></i> &nbsp;{{l.bulk_modal.1}}</h5>
+</div>
+
+<div class="modal-body">
+<div class="alert alert-info alert-styled-left text-blue-800 content-group">
+{{l.bulk_modal.2}}
+<button type="button" class="close" data-dismiss="alert">×</button>
+</div>
+{{l.bulk_modal.4}}
+<p>
+<br>
+</p>
+</div>
+
+<div class="modal-footer">
+<a href="{{ path_for('users.bulkdelete') }}" class="btn btn-link text-danger">
+{{l.bulk_modal.6}}</a>
+<button class="btn btn-primary" data-dismiss="modal"> {{l.bulk_modal.7}} </button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="btn-group">
+<button type="button" class="btn bg-teal-400 btn-labeled dropdown-toggle" data-toggle="dropdown"><b><i class="icon-reading"></i></b> {{l.users.23}} <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right">
+<li>
+<a  href="{{ path_for('usersToPdf') }}"><i class="icon-file-pdf" ></i>  
+
+{{l.users.6}}
+</a></li>
+<li>
+<a  href="{{ path_for('usersToCsv') }}"><i class="icon-file-excel" ></i> {{l.users.7}}</a>
+</li>
+</ul>
+</div>
+
+
+</div>
+</div>
+        <div class="breadcrumb-line">
+<ul class="breadcrumb">
+    <li><a href="{{path_for('admin.index')}}" title="{{l.bread.1}}"><i class="icon-home2 position-left"></i>{{l.bread.1}}</a></li>
+    <li class="active" title="{{l.users.1}}" >{{l.users.1}}</li>
+</ul>
+<ul class="breadcrumb-elements not-collapsible  ">
+<li><a href="javascript:;" id="show_search_box"><i class="icon-search4 position-left"></i>{{l.users.22}} </a></li>
+</ul>
+
+</div>
+</div>
+<!-- /page header -->
+
+
+
+
+<!-- Content area -->
+<div class="content">
+		
+{% include "admin/elements/flash.twig" %}
+
+
+
+
+
+
+
+
+<div class="container multiActionWrapper">
+    <div class="col-md-12">
+        <div class="row">
+            <form action="{{path_for('users.multiaction')}}" method="POST" id="multiActionForm">
+                <div class="col-md-2">
+                    <select name="action" class="form-control">
+                        <option >تنفيذ الأمر</option>
+                        <option value="duplicate">تكرار</option>
+                        <option value="delete">حذف</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                   <input type="hidden" id="ids" name='list' value="">
+                    <input type="submit" class='btn btn-primary' value="تطبيق">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Search field -->
+<div class="panel panel-flat" id="search_box" style="display:none;">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{l.users.8}}</h5>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+                <li><a href="javascript:;" id="hide_search_box" ></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <form action="{{ path_for('users')}}" method="get" class="main-search">
+            <div class="input-group content-group">
+                <div class="has-feedback has-feedback-left">
+                    <input type="text" class="form-control input-xlg" value="{{search}}" 
+                    placeholder="{{l.users.91}}" name="search" />
+                    <div class="form-control-feedback">
+                        <i class="icon-search4 text-muted text-size-base"></i>
+                    </div>
+                </div>
+
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-xlg">{{l.users.9}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /search field -->
+
+
+{% if searchView == true %}
+{% if content is  empty %}
+
+<center>
+<h1>{{l.users.10}}</h1>
+<h6>{{l.users.11}}</h6>
+</center>
+
+{% endif %}
+{% endif %}
+
+
+{% if content is not empty %}
+<div class="panel panel-flat">
+    <table class="table table-striped datatable userstable" >
+        <thead>
+            <tr>
+                                                              <th><b><input  type="checkbox" id="checkAllItems"></b></th>
+
+                <th class="col-md-2"><b>{{l.users.15}}</b></th>
+                <th><b>{{l.users.16}}</b></th>
+                <th><b>{{l.users.17}}</b></th>
+                <th><b>{{l.users.18}}</b></th>
+                <th><b>{{l.users.19}}</b></th>
+                <th class="text-center"><b>{{l.users.20}}</b></th>
+            </tr>
+        </thead>
+        <tbody>  
+        {% for user in content %}
+        
+        {% if user.statue != 'supper' %}
+         <tr>
+           
+                               <td><input type="checkbox" data-item='{{user.id}}' class='Tableitem'></td>
+
+            <td>
+                <div class="media-left media-middle"><div class="avatar"><img src="{{user.avatar}}" /></div></div>
+                
+                    <span class="text-default letter-icon-title username_text">
+                    {{ user.username}}
+                    </span>
+               
+            </td>
+             <td>{{ user.email}}</td>
+             <td>{{ user.created_at }}</td>
+             <td>{{ user.role() }}</td>
+             <td>{{ user.statue() }}</td>
+             <td>
+              <a href="{{ path_for('users.edit', {'id': user.id}) }}" class="text-primary-600">
+                  <i class="icon-pencil7 position-left"></i>{{l.users.20}} </a>
+             </td>
+         </tr>
+         {% endif %}
+         {% endfor %}   
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<center>{{pagination|raw}}</center>
+
+    </div>
+</div>
+   
+
+{% endblock %}	
+            

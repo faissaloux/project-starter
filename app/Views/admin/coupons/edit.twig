@@ -1,0 +1,241 @@
+{% extends "admin/layout.twig" %}
+
+{% block title %} تعديل القسيمة  {% endblock %}
+
+
+{% block content %}
+ 
+				<!-- Content area -->
+				<div class="content">
+
+				<!-- Page header -->
+				<div class="page-header page-header-transparent">
+					<div class="page-header-content">
+						<div class="page-title">
+							<h1> <span class="text-semibold">تعديل القسيمة</span></h1>
+						</div>
+					</div>
+				</div>
+				<!-- /page header -->
+			
+                    
+
+			        {% include "admin/elements/flash.twig" %}
+<form action="{{ path_for('coupons.update', {id : content.id} ) }}" method="POST"  class="form-horizontal">
+
+<div class="col-md-8">
+
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">تفعيل القسيمة</label>
+                <div class="col-sm-9">
+
+                    <label class="adminswitch">
+                    
+    <input name='statue' type="checkbox"  value="active" {% if content.statue  == 'active' %} checked="checked" {% endif %} />
+    <span class="slider round"></span>
+    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">عنوان القسيمة</label>
+                <div class="col-sm-9">
+                    <input type="text" name="name" value="{{content.title}}" placeholder="عنوان القسيمة" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">رمز القسيمة</label>
+                <div class="col-sm-9">
+                    <input type="text" name="code" value="{{content.code}}" placeholder="رمز القسيمة" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">النوع</label>
+                <div class="col-sm-9">
+                    <select name="type" id="input-type" class="form-control">
+<option value="percent">التخفيظ بالمئة</option>
+<option value="fixed">تخفيظ ثابث</option>
+</select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">قيمة التخفيظ</label>
+                <div class="col-sm-9">
+                    <input type="text" name="discount" value="{{content.discount}}" placeholder="قيمة التخفيظ" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">للأعضاء المسجلين فقط</label>
+                <div class="col-sm-9">
+                    <label class="adminswitch">
+                   
+    <input name='logged' type="checkbox"  value="active"  {% if content.logged  == 'active' %} checked="checked" {% endif %} />
+    <span class="slider round"></span>
+    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">شحن مجاني</label>
+                <div class="col-sm-9">
+                    <label class="adminswitch">
+    <input name='shipping' type="checkbox"  value="active" {% if content.shipping  == 'active' %} checked="checked" {% endif %} />
+    <span class="slider round"></span>
+    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">الوصف</label>
+                <div class="col-sm-9">
+                    <textarea name="description" class="form-control" id="" cols="30" rows="10">{{content.description}}</textarea>
+
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">تاريخ بدأ الصلاحية</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="date_start" value="{{content.valid_from}}" placeholder="تاريخ بدأ الصلاحية" id="input-date-start" class="form-control">
+                        <span class="input-group-btn">
+<button type="button" class="btn btn-default"><i class="icon-calendar3"></i></button>
+</span></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">تاريخ انتهاء الصلاحية</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="date_end" value="{{content.valid_to}}" placeholder="تاريخ انتهاء الصلاحية" class="form-control">
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"><i class="icon-calendar3"></i></button>
+                        </span></div>
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">مرات الإستخدام</label>
+                <div class="col-sm-9">
+                    <input type="text" name="maxUsage" value="{{content.maxUsage}}" placeholder="عدد مرات استخدام القسيمة" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ <div class="col-md-4">
+<button type="submit" class="btn btn-block btn-primary"> حفظ التغييرات <i class="icon-arrow-left13 position-right"></i></button>
+
+
+
+         
+        <div class="panel" style="margin-top: 35px;">
+								<div class="panel-body">
+									<h5 class="content-group">
+										<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+											<i class="icon-info3"></i>
+										</span>
+
+											هل تحتاج مساعدة ؟
+										
+									</h5>
+
+
+									<ul class="list list-icons">
+										<li>
+											<i class="icon-checkmark-circle text-success position-left"></i>
+											<b>عنوان القسيمة</b>
+											<br>
+											<p class="mg10">عنوان القسيمة هو مجرد عنوان تضعه حتى تستطيع التمييز بين القسائم ، لن يظهر للمستخدم</p>
+										</li>
+										<li>
+
+											<i class="icon-checkmark-circle text-success position-left"></i>
+											<b>النوع </b>
+											<br>
+											<p class="mg10">
+											    يمكنك اختيار التخفيظ بالمئة ، مثلا اذا اشترى شخصاً ما ، واستخدم القسيمة سيحصل على تخفيظ بتلك النسبة المئوية من مجموع سعر المنتوجات
+											</p>
+										
+                                        </li>
+                                        
+                                        
+                                        
+                                        
+                                     <li>
+
+											<i class="icon-checkmark-circle text-success position-left"></i>
+											<b>تاريخ بدأ الصلاحية </b>
+											<br>
+											<p class="mg10">
+هو التاريخ الذي سيستطيع الزوار استخدام هذه القسيمة ، يمكنك ترك الحقل فارغا لكي يصبح استخدامه  في الحين وبدون توقيت											</p>
+										
+                                        </li>
+                                        
+                                        
+                                        
+                                             
+                                        
+                                     <li>
+
+											<i class="icon-checkmark-circle text-success position-left"></i>
+											<b>تاريخ انتهاء الصلاحية </b>
+											<br>
+											<p class="mg10">
+هو التاريخ الذي لن تصبح القسيمة صالحة للإستخدام ، يمكنك ترك الحقل فارغا لكي يصبح استخدامه في الحين وبدون توقيت											</p>
+										
+                                        </li>
+                                        
+                                           
+                                        
+                                        
+                                        
+                                        
+                                        
+									<li>
+
+											<i class="icon-checkmark-circle text-success position-left"></i>
+											<b> الوصف </b>
+											<br>
+											<p class="mg10"> الوصف هو من أجل اعطاء وصف لهذه القسيمة ، يمكنك ترك الحقل فارغاً.</p>
+										
+                                        </li>
+											<li>
+
+											<i class="icon-checkmark-circle text-success position-left"></i>
+											<b> مرات الإستخدام </b>
+											<br>
+											<p class="mg10">  هو عدد المرات التي يمكن استخدام هذه القسيمة ، على سبيل المثال ، يمكن استخدامها والإستفادة من العرض لـ 100 مرة فقط 
+											، يمكنك تركه فارغاً للإستخدام اللامحدود
+											
+											</p>
+										
+                                        </li>
+									
+											
+																											
+										
+
+									</ul>
+								</div>                     
+        </div>
+ 
+            
+        
+            
+            
+
+
+<br>
+
+ </div>
+ </form>
+ 
+</div>
+<!-- /content area -->
+
+
+
+    
+ 
+{% endblock %}

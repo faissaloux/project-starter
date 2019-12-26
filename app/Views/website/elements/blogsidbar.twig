@@ -1,0 +1,18 @@
+<div class="col-sm-3 sidebar">
+	<div class="sidebar-block blog-category">
+		<h3 class="sidebar-title"><span>Category</span></h3>
+		<div class="sidebar-content">
+			<ul class="category">
+				
+				{% for categorie in categories %}
+				<li class="nav-item">
+					<a title="{{categorie.name}}" href="{{path_for('blog.categorie',{id : categorie.id })}}">
+						{{categorie.name}}
+					</a>
+				</li>
+				{% endfor %}
+				
+			</ul>
+		</div>
+	</div>
+</div>

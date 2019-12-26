@@ -1,0 +1,183 @@
+{% extends "admin/layout.twig" %}
+
+{% block title %} {{l.pagesedit.85}} {% endblock %}
+
+
+{% block content %}
+<!-- Main content -->
+<div class="content-wrapper">
+
+
+
+<!-- page header -->
+<div class="page-header page-header-default ">
+    <div class="page-header-content">
+    <div class="page-title">
+       
+        <h1>
+        <span class="text-semibold"><i class="icon-arrow-right6 position-left goback"></i>
+        {{l.pages.85}}
+        </span>
+        </h1><a class="heading-elements-toggle"><i class="icon-more"></i></a>
+        </div>
+       
+       
+        <div class="heading-elements">
+           
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+       <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+        <ul class="breadcrumb">
+            <li><a href="{{path_for('admin.index')}}" title="{{l.bread.1}}"><i class="icon-home2 position-left"></i>{{l.bread.1}}</a></li>
+            <li><a href="{{path_for('pages')}}" title="{{l.pages.71}}">{{l.pages.71}}</a></li>
+            <li class="active" title="{{l.pages.85}}">{{l.pages.85}}</li>
+            
+        </ul>
+    </div>
+</div>
+<!-- page header -->
+ 
+
+				<!-- Content area -->
+				<div class="content">
+			
+			
+
+			
+
+			        {% include "admin/elements/flash.twig" %}
+
+<div class="col-md-12">								
+
+<form  enctype="multipart/form-data" id="user_form" method='post' action="{{ path_for('pages.update', {id :content.id }) }}">
+<input type="hidden"  name="thumbnailChanged" id="thumbnailChanged" value="false" />
+ 
+
+
+<div class="col-md-9">
+    <div class="form-group">
+               <label class="control-label">{{l.pagescreate.93}}</label>
+        
+
+        <input type="text" class="form-control" name="title" placeholder="{{l.pagescreate.93}}" value="{{content.title}}" />
+    </div>
+    <div class="form-group">	
+        <textarea name="post_content" id="posteditor" class="cke_rtl" >{{content.content}}</textarea>
+    </div>					
+</div>
+
+
+<!-- sidebar -->
+<div class="col-md-3">
+    <button type="submit" class="btn btn-block btn-primary">{{l.pagesedit.104}} <i class="icon-arrow-left13 position-right"></i></button>
+    <br>
+    
+    
+    <!-- post Thumbnail -->
+    <div class="panel panel-white">
+                <div class="panel-heading ">
+                    <h6 class="panel-title">{{l.pagesedit.105}} </h6>
+                    <div class="heading-elements" >
+                        <ul class="icons-list">
+                        {% if content.thumbnail  != " "  %}
+                            <li><a id="deleteImage"><i class="icon-cross2 position-right"></i> {{l.pagesedit.106}} </a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                
+                <!-- preview thumbnail -->
+                <div class="preview-thumbnail" >
+                   {% if content.thumbnail  != " "  %} <img src="{{url.pages}}{{content.thumbnail}}"   id="post_thumbnail"  /> {% endif %}
+                </div>
+                
+                <!-- thumbnail tools -->
+                <div class="thumbnail-tools" {% if content.thumbnail  != " "  %} style="display:none;" {% endif %}>
+                  <label for="Upload-thumbnail"  ><i class="icon-image2 position-left"></i> {{l.pagesedit.107}} </label>
+                  <input name="post_thumbnail" id="Upload-thumbnail" accept="image/jpg, image/jpeg, image/png" type="file" />  
+                </div>
+                <!-- thumbnail tools -->
+ 
+                </div>
+            </div>
+            
+            
+            
+
+            
+
+        </div>
+ </form>
+ </div>
+</div>
+<!-- /content area -->
+
+
+</div>
+<style>
+.preview-thumbnail img {
+    width: 100%;
+    margin-bottom: 25px;
+}
+#Upload-thumbnail {
+    display: none;
+}
+</style>
+
+
+ <script src="{{assets }}admin/ckeditor/ckeditor.js"></script>
+
+<script>
+CKEDITOR.replace( 'posteditor', {
+     language: '{{l.lang}}',
+}); 
+</script>
+    
+
+<!-- set the select -->		
+<script> $('.postCategory').select2({ placeholder: 'تحديد تصنيف المنتوج',}); </script>
+
+<!-- change the value of selected Country to user's country -->
+<script> $(document).ready(function() { $(".postCategory").select2().val("{{content.categoryID}}").trigger("change") }); </script>		
+	
+<script>
+    
+function readURL(input) {
+
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+$('.preview-thumbnail img').attr('src', e.target.result);
+}
+reader.readAsDataURL(input.files[0]);
+}
+}
+    
+
+</script>
+
+<!-- حذف الصور -->
+<script>
+$("#deleteImage").click(function(){
+        $("#thumbnailChanged").val("true");          // تعين الحقل بأنه تم التغيير
+        $(".thumbnail-tools").show();         // اظهار الزر للرفع من جديد
+        $("#post_thumbnail").remove();   // مسح الصورة القديمة
+        $("#deleteImage").hide();               // اخفاء زر الحذف
+});
+</script>
+
+<!-- تغيير الصورة الجديدة -->
+<script>
+$("#Upload-thumbnail").change(function(){    
+    $('.preview-thumbnail').html('<img src="" id="post_thumbnail" /> ');  // اضافة الصورة الجديدة
+    $('.thumbnail-tools').hide();         // اخفاء زر اضافة صورة
+    $("#deleteImage").show();               // اظهار زر حذف صورة
+    readURL(this);                          // اظهار الصورة التي تم اختيارها
+    $("#thumbnailChanged").val("true");          // جعل القيمة تم تغييره
+});    
+</script>
+
+{% endblock %}

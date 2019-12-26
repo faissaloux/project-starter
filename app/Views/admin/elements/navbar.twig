@@ -1,0 +1,74 @@
+<!-- Main navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{path_for('admin.index')}}">{{l.navbar.1}}</a>
+
+        <ul class="nav navbar-nav visible-xs-block">
+            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-mobile">
+        <ul class="nav navbar-nav">
+            <li><a class="sidebar-control sidebar-main-toggle hidden-xs "><i class="icon-paragraph-justify3"></i></a></li>
+            <li><a class="goout" target="_blank" href="{{base_url() }}">
+            <i class="icon-enter"></i>
+            {{l.navbar.2}}</a></li>
+            
+           <li class="dropdown language-switch">
+					<a class="dropdown-toggle" data-toggle="dropdown">
+					<i class="icon-plus3"></i>	{{l.navbar.5}}
+				
+						<span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu">
+                            <li><a href="{{path_for('users.create')}}">{{l.navbar.6}}</a></li>
+                            <li><a href="{{path_for('pages.create')}}">{{l.navbar.7}}</a></li>
+                            <li><a href="{{path_for('posts.create')}}">{{l.navbar.8}}</a></li>
+                            <li><a href="{{path_for('products.create')}}">{{l.navbar.9}}</a></li>
+					</ul>
+				</li>
+            
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+           
+           <li class="hidden-xs">
+                    <a href="#" onClick="go_full_screen();" ><i class="icon-enlarge"></i></a>
+                </li>
+         
+           
+           <li class="dropdown language-switch hidden">
+					<a class="dropdown-toggle" data-toggle="dropdown">
+						<img src="{{assets}}/admin/images/{{l.lang}}.png" class="position-left" alt="">
+				
+						<span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu ">
+                            <li><a class="deutsch" href="?lang=ar"><img src="{{assets}}/admin/images/ar.png" alt=""> العربية</a></li>
+                            <li><a class="deutsch" href="?lang=en"><img src="{{assets}}/admin/images/en.png" alt=""> English</a></li>
+<!--                            <li><a class="deutsch" href="?lang=fr"><img src="{{assets}}/admin/images/fr.png" alt=""> français</a></li>-->
+					</ul>
+				</li>
+           
+           
+            <li class="dropdown dropdown-user">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="{{assets}}/admin/images/ar.png" alt="">
+                    <span>
+                        {{admin.full_name}}
+                    </span>
+                    <i class="caret"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{{path_for('settings.account')}}"><i class="icon-cog5"></i> {{l.navbar.3}}</a></li>
+                    <li><a href="{{path_for('logout')}}"><i class="icon-switch2"></i>{{l.navbar.4}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /main navbar -->

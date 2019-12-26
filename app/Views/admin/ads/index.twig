@@ -1,0 +1,169 @@
+{% extends "admin/layout.twig" %} {% block title %} {{l.ads.1}} {% endblock %} {% block content %}
+
+
+<!-- Main content -->
+<div class="content-wrapper">
+
+
+    <!-- Page header -->
+    <div class="page-header page-header-transparent">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h1> <span class="text-semibold">{{l.ads.1}}</span></h1>
+            </div>
+
+            <div class="heading-elements">
+                {% if content is not empty %}
+                <a href="{{ path_for('ads.create') }}" class="btn bg-blue btn-labeled heading-btn"><b><i class="icon-plus3"></i></b>{{l.ads.2}}</a>
+
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#modal_iconified" class="btn bg-danger btn-labeled heading-btn"><b><i class="icon-trash"></i></b> {{l.ads.3}}</a>
+
+
+
+
+
+                <div id="modal_iconified" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <h5 class="modal-title"><i class="icon-menu7"></i> &nbsp;{{l.bulk_modal.1}}</h5>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="alert alert-info alert-styled-left text-blue-800 content-group">
+                                    {{l.bulk_modal.2}}
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                </div>
+                                {{l.bulk_modal.4}}
+                                <p>
+                                    <br>
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <a href="{{ path_for('ads.bulkdelete') }}" class="btn btn-link text-danger">
+            {{l.bulk_modal.6}}</a>
+                                <button class="btn btn-primary" data-dismiss="modal"> {{l.bulk_modal.7}} </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Content area -->
+    <div class="content">
+
+        {% include "admin/elements/flash.twig" %} {% if content is empty %}
+
+        <div class="empty_state text-center">
+
+            <i class="icon-folder-open2 empty_state_icon"></i>
+            <h4>
+                {{l.ads.5}}
+
+            </h4>
+            <a href="{{ path_for('ads.create') }}" class="btn bg-blue btn-labeled heading-btn"><b><i class="icon-plus3"></i></b>
+        {{l.ads.6}}
+             </a>
+
+        </div>
+
+
+
+
+        {% endif %} {% if content is not empty %}
+
+
+        <div class="panel panel-flat">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><b>#</b></th>
+                        <th class="col-md-2"><b>{{l.ads.7}}</b></th>
+                        <th><b>{{l.ads.8}}</b></th>
+                        <th><b>{{l.ads.9}}</b></th>
+                        <th class="text-center"><b>{{l.ads.10}}</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ad in content %}
+                    <tr>
+                        <td>{{ ad.id }}</td>
+                        <td>
+                            {{ ad.name}}
+                        </td>
+                        <td>{{ ad.created_at }}</td>
+                        <td>{{ ad.displayStatue() }}</td>
+                        <td class="text-center">
+
+
+                            <ul class="icons-list">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a href="{{ path_for('ads.edit', {'id': ad.id}) }}" class="text-primary-600">
+                                                <i class="icon-pencil7 position-left"></i>{{l.ads.11}} </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path_for('ads.delete', {'id': ad.id}) }}" class="text-danger-600">
+                                                <i class="icon-cross2 position-left"></i>{{l.ads.12}} </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{path_for('ads.clone', {id : ad.id})}}" class="text-bg-info">
+                                                <i class="icon-stack-plus position-left"></i>تكرار الإعلان
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+
+
+
+
+
+
+
+
+
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th><b>#</b></th>
+                        <th class="col-md-2"><b>{{l.ads.7}}</b></th>
+                        <th><b>{{l.ads.8}}</b></th>
+                        <th><b>{{l.ads.9}}</b></th>
+                        <th class="text-center"><b>{{l.ads.10}}</b></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        {% endif %} <center>{{pagination|raw}}</center>
+
+    </div>
+</div>
+
+{% endblock %}
