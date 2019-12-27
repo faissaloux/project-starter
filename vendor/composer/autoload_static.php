@@ -9,51 +9,32 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
-        'fe62ba7e10580d903cc46d808b5961a4' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/helpers.php',
-        'caf31cc6ec7cf2241cb6f12c226c3846' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/alias.php',
-        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'f' => 
-        array (
-            'forxer\\Gravatar\\' => 16,
-        ),
         'T' => 
         array (
             'Twig\\Extensions\\' => 16,
             'Twig\\' => 5,
-            'Tightenco\\Collect\\' => 18,
         ),
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Translation\\' => 30,
-            'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
+            'Svg\\' => 4,
             'Slim\\Views\\' => 11,
             'Slim\\Flash\\' => 11,
             'Slim\\' => 5,
-        ),
-        'R' => 
-        array (
-            'Rakit\\Validation\\' => 17,
         ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
-        ),
-        'O' => 
-        array (
-            'Otherguy\\Currency\\' => 18,
         ),
         'N' => 
         array (
@@ -65,9 +46,7 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         ),
         'I' => 
         array (
-            'Interop\\Container\\' => 18,
             'Illuminate\\Support\\' => 19,
-            'Illuminate\\Pagination\\' => 22,
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
@@ -76,11 +55,9 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         array (
             'FontLib\\' => 8,
             'FastRoute\\' => 10,
-            'Facebook\\' => 9,
         ),
         'D' => 
         array (
-            'DrewM\\MailChimp\\' => 16,
             'Dompdf\\' => 7,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
@@ -95,10 +72,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
     );
 
     public static $prefixDirsPsr4 = array (
-        'forxer\\Gravatar\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/forxer/gravatar/src',
-        ),
         'Twig\\Extensions\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/extensions/src',
@@ -106,14 +79,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
-        ),
-        'Tightenco\\Collect\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tightenco/collect/src/Collect',
-        ),
-        'Symfony\\Polyfill\\Php72\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -127,13 +92,13 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         array (
             0 => __DIR__ . '/..' . '/symfony/translation-contracts',
         ),
-        'Symfony\\Component\\VarDumper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/var-dumper',
-        ),
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Svg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
         ),
         'Slim\\Views\\' => 
         array (
@@ -147,10 +112,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
         ),
-        'Rakit\\Validation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/rakit/validation/src',
-        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -163,10 +124,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Otherguy\\Currency\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/otherguy/php-currency-api/src',
-        ),
         'Noodlehaus\\' => 
         array (
             0 => __DIR__ . '/..' . '/hassankhan/config/src',
@@ -175,17 +132,9 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         array (
             0 => __DIR__ . '/..' . '/kanellov/slim-twig-flash/src',
         ),
-        'Interop\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
-        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/support',
-        ),
-        'Illuminate\\Pagination\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/illuminate/pagination',
         ),
         'Illuminate\\Database\\' => 
         array (
@@ -206,14 +155,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
-        ),
-        'Facebook\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
-        ),
-        'DrewM\\MailChimp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/drewm/mailchimp-api/src',
         ),
         'Dompdf\\' => 
         array (
@@ -247,20 +188,9 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         ),
         'S' => 
         array (
-            'Svg\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src',
-            ),
             'Sabberworm\\CSS' => 
             array (
                 0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
-            ),
-        ),
-        'R' => 
-        array (
-            'Requests' => 
-            array (
-                0 => __DIR__ . '/..' . '/rmccue/requests/library',
             ),
         ),
         'P' => 
@@ -268,13 +198,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
-        ),
-        'J' => 
-        array (
-            'JasonGrimes' => 
-            array (
-                0 => __DIR__ . '/..' . '/jasongrimes/paginator/src',
             ),
         ),
     );
@@ -286,8 +209,6 @@ class ComposerStaticInitd3702cf20da8ec23086cebcd71bff65a
         'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
         'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
         'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
-        'TwitterAPIExchange' => __DIR__ . '/..' . '/j7mbo/twitter-api-php/TwitterAPIExchange.php',
-        'upload' => __DIR__ . '/..' . '/verot/class.upload.php/src/class.upload.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

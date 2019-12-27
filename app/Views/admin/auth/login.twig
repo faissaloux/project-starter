@@ -13,15 +13,9 @@
     
     <!-- favicon -->
 	<link rel="icon" type="image/x-icon" href="{{ assets }}admin/images/favicon.png" /> 
- 
-    
-	{% if l.lang == 'ar' %}
-    <!-- css style -->
-	<link rel="stylesheet" type="text/css" href="{{assets}}admin/css/rtl.css" />
-	{% else %}
+
     <!-- css style -->
 	<link rel="stylesheet" type="text/css" href="{{assets}}admin/css/ltr.css" />
-	{% endif %}
 	
 	<!-- JS script -->
 	<script type="text/javascript" src="{{ assets }}js/all.js"></script>
@@ -78,36 +72,6 @@
 
            
            
-           
-            
-                    <!-- Password recovery -->
-					<form  action="{{ path_for('recover')}}" style="display:none;"  id="passwordRecoverForm" method="post" autocomplete="off">
-						<div class="panel panel-body login-form" >
-                            <div id="resultRecover">{% include "admin/elements/flash.twig" %}</div>
-							<div class="text-center">
-								<div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
-								<h5 class="content-group">{{l.Auau.4}}<br><br>
-								<small class="display-block" style="line-height: 22px">
-								    {{l.Auau.5}}<br><br>
-								    {{l.Auau.6}}
-								</small>
-								</h5>
-							</div>
-
-							<div class="form-group has-feedback">
-								<input type="text" class="form-control frequired" name="email" placeholder="">
-								<div class="form-control-feedback">
-									<i class="icon-mail5 text-muted"></i>
-								</div>
-							</div>
-
-							<button type="submit" class="btn bg-blue btn-block">{{l.Auau.4}} <i class="icon-arrow-left13 position-right"></i></button>
-							<br>
-							<div class="text-center"><a id="ShowLoginForm" href="javascript:void(0);">{{l.Auau.8}}</a></div>
-						</div>
-					</form>
-					<!-- /password recovery -->
-            
         </div>
     </div>
 </div>

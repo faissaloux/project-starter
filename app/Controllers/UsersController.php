@@ -5,9 +5,7 @@ use \App\Classes as classes;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Models\User;
-use forxer\Gravatar\Gravatar;
 use \App\Classes\files;
-use Dompdf\Dompdf;
 use JasonGrimes\Paginator;
 
 
@@ -22,19 +20,7 @@ class UsersController extends Controller{
     public $model = 'user';
     public $folder = 'users';
     
-    public $messages = [
-        'created'           => 'coupon code has been created successfully',
-        'deleted'           => 'copoun code has been deleted successfully',
-        'updated'           => 'copoun code has been updated successfully',
-        'bulkDelete'        => 'copouns has been deleted successfully',
-        'cloned'            => 'copoun code has been duplicated successfully',   
-    ];
-    
-    
-    public function changeUserStatue(){
-        
-    }
-
+   
     // Delete the user
     public function delete($request,$response,$args) {
         
@@ -65,45 +51,13 @@ class UsersController extends Controller{
         return $response->withRedirect($this->router->pathFor('users'));  
     }
     
-    
-    // Activate the user
-    public function activate($request,$response,$args) {
-        
-        // get the id & the post
-        $id = rtrim($args['id'], '/');
-        $user = User::find($id);
-
-        // if the user exist delete it & flash success
-        if($user) { $user->statue = 1; $user->save(); $this->flashsuccess($this->lang['flash']['97']); }
-        
-        // redirect to users Home
-        return $response->withRedirect($this->router->pathFor('users'));  
-    }
-    
-    
-    // Block the user
-    public function block($request,$response,$args) {
-        
-        // get the id & the post
-        $id = rtrim($args['id'], '/');
-        $user = User::find($id);
-
-        // if the user exist delete it & flash success
-        if($user) { $user->statue = 3 ; $user->save(); $this->flashsuccess($this->lang['flash']['98']); }
-        
-        // redirect to users Home
-        return $response->withRedirect($this->router->pathFor('users'));  
-    }
-
+   
     
     public function account($request,$response) {
        return $this->container->view->render($response,'admin/account.twig');
     } 
     
-    
-//    public function saveData($post){
-//        
-//    }
+
 
     
     public function store($request,$response,$args){
@@ -260,14 +214,11 @@ class UsersController extends Controller{
                 $user->username     = strtolower($post['username']);;
                 $user->full_name    = strtolower($post['full_name']);
                 $user->email        = strtolower($post['email']);
-                $user->gender       = $post['gender'];
                 $user->birth        = $post['birth'];
                 $user->phone        = $post['phone'];
                 $user->country      = $post['country'];
                 $user->description  = $post['description'];
-                $user->facebook     = $post['facebook'];
-                $user->twitter      = $post['twitter'];
-                $user->youtube      = $post['youtube'];
+
                 $user->save();
                 
                 // update the session info
@@ -280,108 +231,5 @@ class UsersController extends Controller{
              
     }
       
-    
-    public function export_pdf($request,$response) {
 
-        // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
-        
-        $users = User::All();
-        ob_start();
-        ?>
-        <style>
-            table tr td{
-                border-bottom: 1px solid black;
-                padding: 5px;
-            }
-        </style>
-        <table>
-            <tr>
-                <th>Userame</th>
-                <th>Email</th>
-                <th>Created at</th>
-            </tr>
-            <tbody>
-              <tr><td colspan="3"></td></tr>
-               <?php foreach($users as $user): ?>
-                <tr>
-                    <td style="width:250px;"><?php echo $user->username ?></td>
-                    <td style="width:250px;"><?php echo $user->email ?></td>
-                    <td style="width:250px;"><?php echo $user->created_at ?></td>                    
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        
-        <?php
-        
-        $users = ob_get_clean();
-
-        $dompdf->loadHtml($users);
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $filename = date('Y-m-d') . '_users.pdf';
-        $dompdf->stream($filename);
-
-    }
-   
-    public function export_csv($request,$response) {
-       
-            $stream = fopen('php://memory', 'w+');
-            fwrite($stream, chr(0xEF) . chr(0xBB) . chr(0xBF));
-            
-            // Add header
-            $columns = [
-                'username','full_name','email','created_at','updated_at','deleted_at',
-                'description','phone','facebook','twitter',  'youtube','country', 'ip','gender','birth'
-            ];
-        
-            fputcsv($stream, $columns, ';');
-        
-            $users = User::All(['username',
-                'full_name','email', 'created_at','updated_at','deleted_at','description',
-                'phone','facebook','twitter','youtube','country','ip','gender','birth'
-            ]);
-       
-            foreach ($users as $user) {
-                  $data = [
-                           $user->username,
-                            $user->full_name,
-                            $user->email,
-                            $user->created_at,
-                            $user->updated_at,
-                            $user->deleted_at,
-                            $user->description,
-                            $user->phone,
-                            $user->facebook,
-                            $user->twitter,
-                            $user->youtube,
-                            $user->country,
-                            $user->ip,
-                            $user->gender,
-                            $user->birth,
-
-                        ];
-
-                fputcsv($stream, $data, ';');
-            }
-                  
-            rewind($stream);
-            $filename = date('Y-m-d') . '_users.csv';
-            $response = $this->response
-                ->withHeader('Content-Type', 'text/csv')
-                ->withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
-                ->withHeader('Pragma', 'no-cache')
-                ->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
-                ->withHeader('Expires', '0');
-
-            return $response->withBody(new \Slim\Http\Stream($stream));     
-    }  
-    
 }

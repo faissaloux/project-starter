@@ -30,20 +30,11 @@ class Controller {
     
     // Tools & Helpers
     protected $container;
-    protected $helper;
-    protected $lang;
-    protected $validator;
-    
-    
 
-    
+
     // init the Controller
     public function __construct($container){
-       $this->container         = $container; 
-       $this->lang              = isset($_SESSION['lkkk']);
-       $this->validator         = new Validator();
-       $this->helper            = new Helper();
-       $this->uploader          = new Uploader();
+        
         
     } 
     
@@ -102,48 +93,6 @@ class Controller {
     
     
     
-    
-    public function AutoShareTwitter(){
-        
-        
-         
-        $settings = [
-            'oauth_access_token',
-            'oauth_access_token_secret' ,
-            'consumer_key' ,
-            'consumer_secret' , 
-        ];
-        $settings = array_combine($settings,$this->container->twitter);
-        
-        
-        $postfields = array(
-          'status' => "script test allah allah",
-        );	
-
-        $url = 'https://api.twitter.com/1.1/statuses/update.json';
-
-        $requestMethod = 'POST';
-        $twitter = new TwitterAPIExchange($settings);
-        $fullResponse = $twitter->buildOauth($url, $requestMethod)
-                        ->setPostfields($postfields)
-                        ->performRequest();
-      
-
-    }
-
-    
-    public function AutoShareFacebook(){
-        
-        $fb = new Facebook\Facebook([
-         'app_id' => 'xxxxxxxxxx',
-         'app_secret' => 'xxxxxxxxxx',
-         'default_graph_version' => 'v2.2',
-        ]);
-        
-    }
-    
-    /************************ MADE MY LIFE EASY ********************/
-
     public function index($request,$response) {
         $r = $this->paginate($this->limit);
         return $this->view->render($response, 'admin/'.$this->folder.'/index.twig', ['content'=>$r[0],'pagination'=>$r[1]]); 
@@ -230,9 +179,7 @@ class Controller {
         }
         return $response->withStatus(302)->withHeader('Location', $this->router->urlFor($this->route['index']));
     }    
-    
-    
-    
+   
     
     
     public function bulkdelete($request,$response) {
@@ -246,39 +193,6 @@ class Controller {
     }  
     
 
-    
-    
-
-    public function multiaction($request,$response){
-        $modelClass = $this->init();
-        $route =  $response->withStatus(302)->withHeader('Location', $this->router->urlFor($this->route['index']));
-        $ids = explode(',',$request->getParam('list')) ?? [];
-        $action = $request->getParam('action');
-        if(!empty($ids)){
-           
-            switch($action){
-                    
-                case 'delete':
-                    $modelClass::whereIn('id', $ids)->delete(); 
-                    $this->flashsuccess($this->messages['multi.delete']);  
-                    return $route;
-                    break;
-                    
-                case 'duplicate':
-                    foreach($ids as $id ){
-                        $this->duplicate($modelClass,$id);
-                    }
-                    return $route;
-
-
-            }
-        }
-        return $route;
-    }
-    
-    
-
-    
     public function check($model,$id){
          return (class_exists($model) and is_numeric($id)) ?  $model::find($id) ?? false : false;
     }

@@ -5,18 +5,10 @@
         "hassankhan/config": "^1.0",
         "illuminate/database": "^5.4",
         "twig/extensions": "*",
-        "verot/class.upload.php": "dev-master",
         "slim/flash": "^0.4.0",
         "kanellov/slim-twig-flash": "^0.2.0",
-        "forxer/Gravatar": "^2.1",
-        "dompdf/dompdf": "^0.8.2",
-        "tightenco/collect": "^5.7",
-        "jasongrimes/paginator": "~1.0",
-        "otherguy/php-currency-api": "^0.1.0",
-        "drewm/mailchimp-api": "^2.5",
-        "rakit/validation": "^1.2",
-        "j7mbo/twitter-api-php": "^1.0",
-        "facebook/graph-sdk": "^5.7"
+        "dompdf/dompdf": "^0.8.2"
+   
     },
     "autoload":{
         "psr-4":{

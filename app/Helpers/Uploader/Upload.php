@@ -41,6 +41,58 @@ namespace App\Helpers\Uploader;
 class Upload {
 
 
+    
+    
+    public $file;
+    
+    public $path;
+    
+    public $name;
+    
+    public $type;
+    
+
+    public function dir($dir){
+        $this->path = $dir;
+        return $this;
+    }
+    
+    
+    
+    public function file($file){
+        $this->file = $file;
+        return $this;
+    }
+    
+    
+    
+    public function text_random($length = 20) {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }   
+    
+    
+
+    
+    public function save(){
+        $handle = new self($this->file);
+        if ($handle->uploaded) {
+              
+              $handle->file_new_name_body  =   $this->text_random();
+              $this->name                  =   $handle->file_new_name_body.'.'.$handle->file_src_name_ext;
+              $this->type                  =   self::getFileType(self::getExtension($this->name));
+              $handle->process($this->path);
+              if ($handle->processed) {
+                $handle->clean();
+              }
+        }
+        
+        return $this;
+    }
+    
+    
+    
+    
     /**
      * Class version
      *
