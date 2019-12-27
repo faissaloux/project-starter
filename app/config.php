@@ -1,7 +1,22 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-define('SCRIPTURL','http://starter.local/');
+
+
+// Getting the Base URL
+if(!empty($_SERVER['HTTP_HOST'])){
+   
+    define('SCRIPTURL',$_SERVER['HTTP_HOST'].'/');
+
+} else {
+    
+	if(!empty($_SERVER['SERVER_NAME'])){
+       
+        define('SCRIPTURL',$_SERVER['SERVER_NAME'].'/');
+	}
+}
+
+
 define('SCRIPTDIR', BASEPATH.'/');
 
 return  [
@@ -11,7 +26,21 @@ return  [
     ],
     
     
-    'db' => [
+      
+    'db_live' => [
+        'driver'             => 'mysql',
+        'host'               => 'localhost',
+        'name'               => 'medisozf_bassiri',
+        'username'           => 'medisozf_bassiri',
+        'password'           => '{bVXu~oD5z*P',
+        'charset'            => 'utf8',
+        'collation'          => 'utf8_general_ci',
+        'strict'             => 'false',
+        'prefix'             => 'na_'
+    ],
+    
+    
+    'db_sandbox' => [
         'driver'             => 'mysql',
         'host'               => 'localhost',
         'name'               => 'bassiri',
@@ -20,7 +49,12 @@ return  [
         'charset'            => 'utf8',
         'collation'          => 'utf8_general_ci',
         'strict'             => 'false',
+        'prefix'             => 'na_'
     ],
+    
+    
+    
+    
     
     'url' => [
         'base'               => SCRIPTURL,

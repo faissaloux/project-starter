@@ -28,20 +28,35 @@ $container['conf'] = function () {
 /***************************************************************/
 /************************ CONNECT TO DATABASE ******************/
 /***************************************************************/
-
 // Connect To DataBase
 $capsule = new Capsule;
-$capsule->addConnection([
-    'driver'    => $container['conf']['db.driver'],
-    'host'      => $container['conf']['db.host'],
-    'database'  => $container['conf']['db.name'],
-    'username'  => $container['conf']['db.username'],
-    'password'  => $container['conf']['db.password'],
-    'charset'   => $container['conf']['db.charset'],
-    'collation' => $container['conf']['db.collation'],
-    'prefix'    => '',
-    'strict' => false
-]);
+if($container['conf']['app.debug']) {
+      $capsule->addConnection([
+            'driver'    => $container['conf']['db_sandbox.driver'],
+            'host'      => $container['conf']['db_sandbox.host'],
+            'database'  => $container['conf']['db_sandbox.name'],
+            'username'  => $container['conf']['db_sandbox.username'],
+            'password'  => $container['conf']['db_sandbox.password'],
+            'charset'   => $container['conf']['db_sandbox.charset'],
+            'collation' => $container['conf']['db_sandbox.collation'],
+            'prefix'    => '',
+            'strict' => false
+        ]);
+}else {
+          $capsule->addConnection([
+            'driver'    => $container['conf']['db_live.driver'],
+            'host'      => $container['conf']['db_live.host'],
+            'database'  => $container['conf']['db_live.name'],
+            'username'  => $container['conf']['db_live.username'],
+            'password'  => $container['conf']['db_live.password'],
+            'charset'   => $container['conf']['db_live.charset'],
+            'collation' => $container['conf']['db_live.collation'],
+            'prefix'    => '',
+            'strict' => false
+        ]);
+}
+  
+
 
 
 // Make this Capsule instance available globally via static methods... (optional)
