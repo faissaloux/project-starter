@@ -78,13 +78,33 @@ try {
 /************************ ADD CONTROLLERS TO CONTAINER ******************/
 /************************************************************************/
 
-foreach (new DirectoryIterator(BASEPATH.'/App/Controllers/') as $file) {
-  if ($file->isFile() and ($file->getFilename() != 'index.php' and $file->getFilename() !=  'settingsController.php')) {
-      $key = str_replace("Controller.php", "", $file->getFilename());
-      $controller = "\\App\\Controllers\\{$key}Controller";
-      $container[$key] = new $controller($container);
-  }
+$path = BASEPATH.'/App/Controllers/';
+
+if ($handle = opendir($path)) {
+    while (false !== ($file = readdir($handle))) {
+        if ('.' === $file) continue;
+        if ('..' === $file) continue;
+        if ('index.php' === $file) continue;
+        
+            if($key != 'settings') {
+                $key = str_replace("Controller.php", "", $file);
+                $controller = "\\App\\Controllers\\{$key}Controller";
+                $container[$key] = new $controller($container);
+
+            }
+    }
+    closedir($handle);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 /************************************************************************/
