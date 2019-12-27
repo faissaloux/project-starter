@@ -7,7 +7,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Controllers\settingsController as settings;
 
 // flash
-use \App\Middleware\flashMiddleware as flash;
+use \App\Middleware\FlashMiddleware as flash;
 use \App\Middleware\OldInputMidddleware as old;
     
     
@@ -21,17 +21,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $app->group('/', function () use($app) {
 
     
-    $this->get('[/]',function(){
-        echo 'kdkjdkjkdjd';
-    });
-    
+    $this->get('[/]', 'Home:home')->setName('admin.index');
     
     $this->get('/account[/]', 'Home:account')->setName('account');
 
     
     
     // users System
-    $this->group('/users', function ( ) {
+    $this->group('users', function ( ) {
         $this->get('[/]', 'Users:index')->setName('users');
         $this->get('/create[/]', 'Users:create')->setName('users.create');
         $this->post('/store[/]', 'Users:store')->setName('users.store');
@@ -49,11 +46,12 @@ $app->group('/', function () use($app) {
 
 
 
-})->add( new App\Middleware\authMiddleware($container) );
+})->add( new App\Middleware\AuthMiddleware($container) );
 
 
 $app->group('/auth', function (){
     $this->post('/login[/]', 'Auth:login')->setName('login');
+    $this->get('/logout[/]', 'Auth:logout')->setName('logout');
 });
 
 

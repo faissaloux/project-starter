@@ -16,21 +16,7 @@
             <i class="icon-enter"></i>
             {{l.navbar.2}}</a></li>
             
-           <li class="dropdown language-switch">
-					<a class="dropdown-toggle" data-toggle="dropdown">
-					<i class="icon-plus3"></i>	{{l.navbar.5}}
-				
-						<span class="caret"></span>
-					</a>
-
-					<ul class="dropdown-menu">
-                            <li><a href="{{path_for('users.create')}}">{{l.navbar.6}}</a></li>
-                            <li><a href="{{path_for('pages.create')}}">{{l.navbar.7}}</a></li>
-                            <li><a href="{{path_for('posts.create')}}">{{l.navbar.8}}</a></li>
-                            <li><a href="{{path_for('products.create')}}">{{l.navbar.9}}</a></li>
-					</ul>
-				</li>
-            
+       
         </ul>
         <ul class="nav navbar-nav navbar-right">
            
@@ -64,7 +50,7 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="{{path_for('settings.account')}}"><i class="icon-cog5"></i> {{l.navbar.3}}</a></li>
+                    <li><a href="{{path_for('account')}}"><i class="icon-cog5"></i> {{l.navbar.3}}</a></li>
                     <li><a href="{{path_for('logout')}}"><i class="icon-switch2"></i>{{l.navbar.4}}</a></li>
                 </ul>
             </li>

@@ -14,7 +14,7 @@ return  [
     'db' => [
         'driver'             => 'mysql',
         'host'               => 'localhost',
-        'name'               => 'madalil',
+        'name'               => 'bassiri',
         'username'           => 'root',
         'password'           => '',
         'charset'            => 'utf8',

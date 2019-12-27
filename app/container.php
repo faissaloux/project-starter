@@ -145,7 +145,7 @@ $container['view'] = function ($c) {
 /******************** ADD CLASSES TO CONTAINER   ************************/
 /************************************************************************/
 $container['db'] = $capsule;
-$container['auth'] = new \App\Helpers\Auth\auth;
+$container['auth'] = new \App\Helpers\Auth();
 
 
 

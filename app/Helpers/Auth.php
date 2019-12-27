@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Helpers\Auth;
+namespace App\Helpers;
 use App\Models\User;
-use App\Classes\Helper;
 
 class Auth {
         
-    
-    
-    
     private $user = false;
+    
     
     public static function User(){
         return $this->user; 
@@ -27,40 +24,21 @@ class Auth {
     }
     
     
-    
+    public function setUser($id){
+       return $this->user = User::find($id); 
+    }
+
     public function attempt($email,$password,$type) {
                 
         $user = User::whereEmail($email)->orWhere('username','=',$email)->first();
         
-        if($type == 'user'){
-            
-
+        if($user) {
             if(password_verify($password,$user->password)) {
-				
-				
-				if($user->statue == 3) {
-                    return false;
-                }
-				
-				
                     session_start();
-                    $_SESSION['auth-user'] = $user->id;
+                    $_SESSION['auth'] = $user->id;
                     return true;
             } 
         }
-        if($type == 'admin'){
-     
-            if($user){
-                if($user->role != '2' and $user->statue != '3') {
-                    return false;
-                }
-                if(password_verify($password,$user->password)) {
-                    $_SESSION['auth-admin'] = $user->id;
-                    return true;
-                } 
-            }
-        }
-        
         return false;
     }
     

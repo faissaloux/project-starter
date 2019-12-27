@@ -7,7 +7,6 @@
         "twig/extensions": "*",
         "slim/flash": "^0.4.0",
         "kanellov/slim-twig-flash": "^0.2.0",
-        "dompdf/dompdf": "^0.8.2"
    
     },
     "autoload":{

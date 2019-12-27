@@ -3,12 +3,7 @@
 namespace App\Controllers;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use JasonGrimes\Paginator;
-use TwitterAPIExchange;
-use \App\Helpers\Helper;
-use \App\Helpers\Validator ;
-use \App\Helpers\Uploader\Uploader;
-use \App\Helpers\Flash;
+use \App\Helpers\Paginator;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -34,8 +29,7 @@ class Controller {
 
     // init the Controller
     public function __construct($container){
-        
-        
+                $this->container = $container;
     } 
     
     
@@ -101,14 +95,14 @@ class Controller {
     public function paginate($limit){
         
         if($this->init()) {
-            $helper         = $this->helper;
+            
             $model          = $this->init();
             $count          = $model::count();  
             $page           = ( isset($_GET['page']) > 0) ? $_GET['page'] : 1;
             $lastpage       = (ceil($count / $limit) == 0 ? 1 : ceil($count / $limit));
             $skip           = ($page - 1) * $limit;
             $result         = $model::skip($skip)->take($limit)->orderBy('created_at', 'desc')->get();
-            $search         = validator::cleanify(isset($_GET['q']));
+            $search         = cleanify(isset($_GET['q']));
             $urlPattern     = !empty($search) ? "?search=$search&page=(:num)" : "?page=(:num)"  ;
             $paginator      = new Paginator($count, $limit, $page, $urlPattern);
             return [$result,$paginator];
