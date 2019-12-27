@@ -200,20 +200,16 @@ $container['view']->getEnvironment()->addGlobal('dir', $container['conf']['dir']
 /************************************************************************/
 /********************** set auth   *************************************/
 /************************************************************************/
-if(isset($_SESSION['auth-admin'])) {   
-    $container['view']->getEnvironment()->addGlobal('admin',$capsule->table('users')->find($_SESSION['auth-admin']) );
+if(isset($_SESSION['auth'])) {   
+    $container['view']->getEnvironment()->addGlobal('admin',$capsule->table('users')->find($_SESSION['auth']) );
 }
-if(isset($_SESSION['auth-colaborator'])) {   
-    $container['view']->getEnvironment()->addGlobal('user',$capsule->table('users')->find($_SESSION['auth-user']) );
-}
-
 
 
 
 /************************************************************************/
 /********************** Language System  ********************************/
 /************************************************************************/
-$file = BASEPATH.'/app/lang/admin/fr.php';
+$file = BASEPATH.'/app/Lang/admin/fr.php';
 $container['view']->getEnvironment()->addGlobal('l', Config::load($file));
 $_SESSION['l'] = include($file);
 
