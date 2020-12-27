@@ -10,9 +10,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
   
 $app->get('/search', function($request, $response){
     $passport = $_GET['passport'];
-    $data = Data::where('passport', $passport)->get();
+    $data['result'] = Data::where('passport', $passport)->first()->toArray();
     
-    return $response->withJson($data, 200);
+    return $response->withJson($data);
 });
 
 $app->get('/payment/{id}', function($request, $response, $args){
