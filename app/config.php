@@ -43,7 +43,7 @@ return  [
     'db_sandbox' => [
         'driver'             => 'mysql',
         'host'               => 'localhost',
-        'name'               => 'bassiri',
+        'name'               => 'saudi',
         'username'           => 'root',
         'password'           => '',
         'charset'            => 'utf8',
