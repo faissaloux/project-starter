@@ -1,60 +1,25 @@
 <?php
 
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
-// make namespace short
-
-use \App\Controllers\settingsController as settings;
-
-// flash
-use \App\Middleware\FlashMiddleware as flash;
-use \App\Middleware\OldInputMidddleware as old;
+use \App\Models\Data;
+use \Carbon\Carbon;
     
     
 // security , disable direct access
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
-/*
-*  Admin Routes
-*/
-$app->group('/', function () use($app) {
-
+  
+$app->get('/search', function($request, $response){
+    $passport = $_GET['passport'];
+    $data = Data::where('passport', $passport)->get();
     
-    $this->get('[/]', 'Home:home')->setName('admin.index');
-    
-    $this->get('/account[/]', 'Home:account')->setName('account');
-
-    
-    
-    // users System
-    $this->group('users', function ( ) {
-        $this->get('[/]', 'Users:index')->setName('users');
-        $this->get('/create[/]', 'Users:create')->setName('users.create');
-        $this->post('/store[/]', 'Users:store')->setName('users.store');
-        $this->get('/export/csv[/]', 'Users:export_csv')->setName('usersToCsv');
-        $this->get('/export/pdf[/]', 'Users:export_pdf')->setName('usersToPdf');        
-        $this->post('/delete/{id}[/]', 'Users:delete')->setName('users.delete');
-        $this->get('/activate/{id}[/]', 'Users:delete')->setName('users.activate');
-        $this->get('/block/{id}[/]', 'Users:block')->setName('users.block');
-        $this->get('/bulkdelete[/]', 'Users:bulkdelete')->setName('users.bulkdelete');
-        $this->post('/multiaction[/]', 'Users:multiaction')->setName('users.multiaction');
-        $this->any('/edit/{id}[/]', 'Users:edit')->setName('users.edit');
-        $this->post('/update/{id}[/]', 'Users:update')->setName('users.update');
-    });
-
-
-
-
-})->add( new App\Middleware\AuthMiddleware($container) );
-
-
-$app->group('/auth', function (){
-    $this->post('/login[/]', 'Auth:login')->setName('login');
-    $this->get('/logout[/]', 'Auth:logout')->setName('logout');
+    return $response->withJson($data, 200);
 });
 
-
-//   Middlewares
-$app->add( new flash($container) );
-$app->add( new old($container) );
+$app->get('/payment/{id}', function($request, $response, $args){
+    $id = rtrim($args['id'], '/');
+    $data = Data::find($id);
+    $data->paid_at = Carbon::now();
+    if($data->save())
+        return $response->withJson(['succes' => 'payment done successfully'], 200);
+    else return $response->withJson(['error' => 'Something went wrong']);
+});
